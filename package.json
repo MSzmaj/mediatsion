@@ -1,0 +1,33 @@
+{
+  "name": "@mszmaj/typedpiper",
+  "version": "1.0.0",
+  "description": "An in-process mediator/pipeline library for Typescript and NodeJS.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSzmaj/TypedPiper.git"
+  },
+  "keywords": [
+    "mediator",
+    "cqs",
+    "cqrs",
+    "command",
+    "query",
+    "separation",
+    "pipeline"
+  ],
+  "author": "mszmaj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MSzmaj/TypedPiper/issues"
+  },
+  "homepage": "https://github.com/MSzmaj/TypedPiper#readme"
+}
