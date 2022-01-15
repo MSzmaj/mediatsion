@@ -1,6 +1,5 @@
 import { Err, Result } from "ts-results";
-import { singleton } from 'tsyringe';
-import { createRequestHandlerToken, IBus, IInput, IRequest, IRequestHandler, IResult, tokenHandlerRegistry } from "..";
+import { createRequestHandlerToken, IBus, IInput, IRequest, IRequestHandler, IResult, tokenHandlerRegistry, Type } from "..";
 import { Activator } from "./activator";
 
 /**
@@ -9,7 +8,6 @@ import { Activator } from "./activator";
  * the correct types. You can leave one of the request/results uninstantiated, but, this will result in 
  * an `undefined` token in the DI container (i.e. IRequestHandler<undefined,{SomeOtherClass}>).
  */
-@singleton()
 class Bus implements IBus {
     private _handlerMap: Map<string, Type<IRequestHandler<any,any>>> = new Map();
 

@@ -29,5 +29,9 @@
   "bugs": {
     "url": "https://github.com/MSzmaj/TypedPiper/issues"
   },
-  "homepage": "https://github.com/MSzmaj/TypedPiper#readme"
+  "homepage": "https://github.com/MSzmaj/TypedPiper#readme",
+  "dependencies": {
+    "reflect-metadata": "^0.1.13",
+    "ts-results": "^3.3.0"
+  }
 }
