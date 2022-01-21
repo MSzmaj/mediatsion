@@ -1,6 +1,6 @@
 {
   "name": "@mszmaj/typedpiper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An in-process mediator/pipeline library for Typescript and NodeJS.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/MSzmaj/TypedPiper/issues"
   },
-  "homepage": "https://github.com/MSzmaj/TypedPiper#readme",
+  "homepage": "https://github.com/MSzmaj/TypedPiper",
   "dependencies": {
     "ts-results": "^3.3.0"
   },
