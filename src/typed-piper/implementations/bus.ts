@@ -1,6 +1,11 @@
-import { Err, Result } from "ts-results";
-import { createRequestHandlerToken, IBus, IInput, IRequest, IRequestHandler, IResult, tokenHandlerRegistry } from "..";
-import { Activator } from "./activator";
+/// <reference path="../common/map.extensions.ts" />
+//...
+import '../common/map.extensions';
+import { Err, Ok, Result } from "ts-results";
+import {    Activator, createEventHandlerToken, createRequestHandlerToken, 
+            eventHandlerTypeRegistry, EVENT_HANDLER_CREATION_ERROR, IBus, IEvent, IEventHandler, IInput, 
+            IRequest, IRequestHandler, IResult, requestHandlerTypeRegistry, REQUEST_HANDLER_CREATION_ERROR 
+        } from "..";
 
 /**
  * Mediator class that all controllers should use in order to call the appropriate request handler.
@@ -9,34 +14,56 @@ import { Activator } from "./activator";
  * an `undefined` token in the DI container (i.e. IRequestHandler<undefined,{SomeOtherClass}>).
  */
 class Bus implements IBus {
-    private _handlerMap: Map<string, Type<IRequestHandler<any,any>>> = new Map();
-
-    public constructor () {
-        this._handlerMap = tokenHandlerRegistry;
-    }
+    private _requestHandlerMap: Map<string, IRequestHandler<any,any>> = new Map();
+    private _eventHandlerMap: Map<string, IEventHandler<any>> = new Map()
 
     async send<TRequest extends IInput, TResult extends IResult>(request: IRequest<TRequest, TResult>): Promise<Result<TResult, Error>> {
         if (request.request === undefined && request.result === undefined) {
-            return Err(new Error("One of request or result must have a type. Did you forget to instantiate an object?"));
+            throw Error(`${EVENT_HANDLER_CREATION_ERROR}: One of request or result must have a type. Did you forget to instantiate an object?`);
         }
 
         try {
             const requestType = request.request?.constructor.name || 'void';
             const resultType = request.result?.constructor.name || 'void';
             const token = createRequestHandlerToken(requestType, resultType);
-            const handlerClass = this._handlerMap.get(token);
+            const handlerClass = requestHandlerTypeRegistry.get(token);
+
             if (handlerClass === undefined) {
-                throw Error();
+                throw Error(`${REQUEST_HANDLER_CREATION_ERROR}: Handler not found for token: ${token}. Are you missing the \`requestHandler\` decorator?`);
             }
-            const handler = Activator.resolve<IRequestHandler<TRequest, TResult>>(handlerClass);
+
+            const handler = this._requestHandlerMap.getOrAdd(token, () => Activator.resolve<IRequestHandler<TRequest, TResult>>(handlerClass));
+
             return await handler.handleAsync();
         } catch (error) {
-            return Err(new Error("Handler not found"));
+            return Err(error as Error);
         }
     }
 
-    async publish(event: Event): Promise<void> {
-        throw new Error("Not implemented.");
+    async publish<TRequest extends IInput>(event: IEvent): Promise<Result<void[], Error>> {
+        try {
+            const requestType = event.constructor.name;
+            const token = createEventHandlerToken(requestType);
+            const handlerClasses = eventHandlerTypeRegistry.get(token);
+
+            if (handlerClasses === undefined) {
+                throw Error(`${REQUEST_HANDLER_CREATION_ERROR}: Handler(s) not found for token: ${token}. Are you missing the \`eventHandler\` decorator?`);
+            }
+            
+            //TODO: cleanup?
+            const results = await Promise.all(
+                handlerClasses.map(
+                    async (handlerClass) => {
+                        const handler = this._eventHandlerMap.getOrAdd(`${handlerClass}`, () => Activator.resolve<IEventHandler<TRequest>>(handlerClass));
+                        await handler.handleAsync(event);
+                    }
+                )
+            );
+
+            return Ok(results);
+        } catch (error) {
+            return Err(error as Error);
+        }
     }
 }
 

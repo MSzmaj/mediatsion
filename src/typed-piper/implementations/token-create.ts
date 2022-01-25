@@ -1,6 +1,9 @@
-
-function createRequestHandlerToken (requestType: string, resultType: string) {
+function createRequestHandlerToken (requestType: string, resultType: string): string {
     return `IRequestHandler<${requestType},${resultType}>`;;
 }
 
-export { createRequestHandlerToken };
+function createEventHandlerToken (event: string): string {
+    return `${event}`;
+}
+
+export { createRequestHandlerToken, createEventHandlerToken };
