@@ -7,6 +7,8 @@ An in-process mediator/pipeline library for Typescript and NodeJS.
 ### Important
 `reflect-metadata` should be imported at the beginning of the application and only once.
 
+### TODO
+
 ## Release Notes:
 ### 0.1.1:
 * Type safety
