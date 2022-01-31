@@ -1,5 +1,3 @@
 interface Type<T> {
-    new(...args: any[]): T;
+    new(...args: unknown[]): T;
 }
-
-export { Type };

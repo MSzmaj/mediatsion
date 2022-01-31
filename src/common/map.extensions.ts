@@ -1,4 +1,4 @@
-Map.prototype.getOrAdd = function<K,V> (key: K, factory: (...args: any[]) => V): V {
+Map.prototype.getOrAdd = function<K,V> (key: K, factory: (...args: unknown[]) => V): V {
     if (this.has(key)) {
         return this.get(key);
     }

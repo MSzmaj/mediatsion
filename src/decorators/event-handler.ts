@@ -1,9 +1,9 @@
 import { createEventHandlerToken, GenericClassDecorator, IEventHandler } from "..";
 
-const eventHandlerTypeRegistry: Map<string,Array<Type<IEventHandler<any>>>> = new Map();
+const eventHandlerTypeRegistry: Map<string,Array<Type<IEventHandler<unknown>>>> = new Map();
 
-const eventHandler = (eventType: string): GenericClassDecorator<Type<IEventHandler<any>>> => {
-    return (target: Type<IEventHandler<any>>) => {
+const eventHandler = (eventType: string): GenericClassDecorator<Type<IEventHandler<unknown>>> => {
+    return (target: Type<IEventHandler<unknown>>) => {
         const token = createEventHandlerToken(eventType);
 
         let handlers = eventHandlerTypeRegistry.get(token);
