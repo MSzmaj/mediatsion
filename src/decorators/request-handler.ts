@@ -1,4 +1,4 @@
-import { createRequestHandlerToken, GenericClassDecorator, IRequestHandler, REQUEST_HANDLER_REGISTRATION_ERROR } from "..";
+import { createRequestHandlerToken, IRequestHandler, REQUEST_HANDLER_REGISTRATION_ERROR } from "..";
 
 const requestHandlerTypeRegistry: Map<string,Type<IRequestHandler<unknown,unknown>>> = new Map();
 

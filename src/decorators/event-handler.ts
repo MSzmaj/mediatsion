@@ -1,4 +1,4 @@
-import { createEventHandlerToken, GenericClassDecorator, IEventHandler } from "..";
+import { createEventHandlerToken, IEventHandler } from "..";
 
 const eventHandlerTypeRegistry: Map<string,Array<Type<IEventHandler<unknown>>>> = new Map();
 
