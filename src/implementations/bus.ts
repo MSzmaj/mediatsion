@@ -54,7 +54,7 @@ class Bus implements IBus {
         const handler = handlerMap.getOrAdd(handlerToken, () => Activator.resolve<THandler>(handlerType));
 
         if (handler === undefined) {
-            throw Error(`${HANDLER_CREATION_ERROR}: Handler(s) could not be created for: ${handlerToken}. Are you missing the \`requestHandler\` or \`eventHandler\` decorator?`);
+            throw Error(`${HANDLER_CREATION_ERROR}: Handler(s) could not be created for: ${handlerToken}.`);
         }
 
         return handler;
