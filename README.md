@@ -1,4 +1,4 @@
-# TypedPiper
+# mediaTS
 An in-process mediator/pipeline library for Typescript and NodeJS.
 
 ## **NOTE: Work in progress**
