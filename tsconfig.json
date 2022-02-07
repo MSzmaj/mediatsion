@@ -13,7 +13,10 @@
         "emitDecoratorMetadata": true,
 	},
     "include": [
-        "src"
+        "src", 
+        "tests/unit-tests/common/map.extensions.test.ts", 
+        "tests/unit-tests/decorators/request-handler.test.ts", 
+        "tests/unit-tests/implementations/activator.test.ts"
     ],
 	"exclude": [
 		"node_modules",
