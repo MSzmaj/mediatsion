@@ -1,5 +1,5 @@
 {
-  "name": "@mszmaj/typedpiper",
+  "name": "@mszmaj/mediats",
   "version": "0.1.1",
   "description": "An in-process mediator/pipeline library for Typescript and NodeJS.",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MSzmaj/TypedPiper.git"
+    "url": "git+https://github.com/MSzmaj/mediats.git"
   },
   "keywords": [
     "mediator",
@@ -29,9 +29,9 @@
   "author": "mszmaj",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MSzmaj/TypedPiper/issues"
+    "url": "https://github.com/MSzmaj/mediats/issues"
   },
-  "homepage": "https://github.com/MSzmaj/TypedPiper",
+  "homepage": "https://github.com/MSzmaj/,mediats",
   "dependencies": {
     "ts-results": "^3.3.0"
   },
