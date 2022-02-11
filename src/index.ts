@@ -11,3 +11,4 @@ export * from './interfaces/i-input';
 export * from './interfaces/i-request-handler';
 export * from './interfaces/i-request';
 export * from './interfaces/i-result';
+export * from './interfaces/type';
