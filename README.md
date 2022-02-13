@@ -9,12 +9,12 @@ An in-process mediator/pipeline library for Typescript and NodeJS.
 ## Packages
 Install `reflect-metadata`: 
 ```
-    npm install reflect-metadata
+npm install reflect-metadata
 ```
 
 Install `mediats`:
 ```
-    npm install mediats
+npm install mediats
 ```
 
 ## **How-To:**
