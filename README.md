@@ -19,7 +19,7 @@ Install `mediats`:
 
 ## **How-To:**
 ### **1A. Create new Request:**
-```
+```typescript
 class ExampleRequest implements IRequest<ExampleInput, ExampleResult> {
     request: ExampleInput = new ExmapleInput();
     result: ExampleResult = new ExampleResult();
@@ -35,14 +35,14 @@ class ExampleResult implements IResult {
 ```
 
 ### **1B. Create new Event:**
-```
+```typescript
 class ExampleEvent implements IEvent {
     example: string
 }
 ```
 
 ### **2A. Create a new Command/Request Handler:**
-```
+```typescript
 @requestHandler('ExampleRequest','ExampleResult')
 class ExampleCommandHandler implements IRequestHandler<ExampleRequest, ExampleResult>  {
     private _exampleRepository: Repository<ExampleEntity>;
@@ -70,7 +70,7 @@ class ExampleCommandHandler implements IRequestHandler<ExampleRequest, ExampleRe
 **NOTE:** he name of the handler; while it is a `IRequestHandler` it might be best to name it either *CommandHandler or *QueryHandler for readability. Typically `Commands` will not provide a `Result` object.
 
 ### **2B. Create a new Event handler:**
-```
+```typescript
 @eventHandler('ExampleEvent')
 class ExampleEventHandler implements IEventHandler<ExampleEvent>  {
     async handleAsync(): Promise<void> {
@@ -80,7 +80,7 @@ class ExampleEventHandler implements IEventHandler<ExampleEvent>  {
 ```
 **NOTE:** Currently you need to pass in the name of the `Event` object as a string.
 ### **3. Use `Bus` to `mediate`:**
-```
+```typescript
 import { Bus } from mediats;
 
 const bus: Bus = new Bus();
