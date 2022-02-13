@@ -1,9 +1,8 @@
 # mediaTS
 An in-process mediator/pipeline library for Typescript and NodeJS.
 
-## **NOTE: Work in progress**
+**NOTE: Work in progress**
 
-# Getting Started
 ## Pre-requisites 
 **IMPORTANT:** `reflect-metadata` must be imported at the start of the application and only once.
 
