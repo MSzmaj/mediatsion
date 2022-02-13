@@ -61,7 +61,7 @@ class ExampleCommandHandler implements IRequestHandler<ExampleRequest, ExampleRe
 
 **NOTE:** Currently you need to pass in the name of the `Request` and `Result` objects as strings. 
 
-**NOTE:** he name of the handler; while it is a `IRequestHandler` it might be best to name it either *CommandHandler or *QueryHandler for readability. Typically `Commands` will not provide a `Result` object.
+**NOTE:** The name of the handler; while it is a `IRequestHandler` it might be best to name it either *CommandHandler or *QueryHandler for readability. Typically `Commands` will not provide a `Result` object.
 
 ### **2B. Create a new Event handler:**
 ```typescript
