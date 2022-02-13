@@ -4,7 +4,7 @@ An in-process mediator/pipeline library for Typescript and NodeJS.
 **NOTE: Work in progress**
 
 ## Pre-requisites 
-**IMPORTANT:** `reflect-metadata` must be imported at the start of the application and only once.
+**IMPORTANT:** [`reflect-metadata`](https://github.com/rbuckton/reflect-metadata) must be imported at the start of the application and only once.
 
 ## Packages
 Install `reflect-metadata`: 
@@ -45,12 +45,6 @@ class ExampleEvent implements IEvent {
 ```typescript
 @requestHandler('ExampleRequest','ExampleResult')
 class ExampleCommandHandler implements IRequestHandler<ExampleRequest, ExampleResult>  {
-    private _exampleRepository: Repository<ExampleEntity>;
-
-    public constructor () {
-        this._exampleRepository = getRepository(ExampleEntity);
-    }
-
     async handleAsync(): Promise<Result<ExampleResult, Error>> {
         let result: Result<ExampleResult, Error>;
         try {
@@ -74,7 +68,7 @@ class ExampleCommandHandler implements IRequestHandler<ExampleRequest, ExampleRe
 @eventHandler('ExampleEvent')
 class ExampleEventHandler implements IEventHandler<ExampleEvent>  {
     async handleAsync(): Promise<void> {
-        //to stuff
+        //do stuff
     }
 }
 ```
