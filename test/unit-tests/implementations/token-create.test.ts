@@ -1,6 +1,6 @@
 import { createEventHandlerToken, createRequestHandlerToken } from "../../../src";
 
-test('create request handler token', () => {
+test('should create request handler token', () => {
     //Arrange
     const expectedToken = 'IRequestHandler<RequestType,ResultType>';
     const requestType = 'RequestType';
@@ -13,7 +13,7 @@ test('create request handler token', () => {
     expect(returnToken).toBe(expectedToken);
 });
 
-test('create event handler token', () => {
+test('should create event handler token', () => {
     //Arrange
     const expectedToken = 'EventType';
     const eventType = 'EventType';

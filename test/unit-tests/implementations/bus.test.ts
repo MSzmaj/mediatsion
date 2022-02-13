@@ -13,7 +13,7 @@ class TestRequestHandler implements IRequestHandler<string,string> {
 
 }
 
-test('bus should mediate: send command', async () => {
+test('bus should send command', async () => {
     //Arrange
     const bus = new Bus();
     const command = new TestRequest();
