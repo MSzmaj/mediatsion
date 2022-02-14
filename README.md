@@ -1,4 +1,4 @@
-# mediaTS
+# mediaTSion
 An in-process mediator/pipeline library for Typescript and NodeJS.
 
 **NOTE: Work in progress**
@@ -12,9 +12,9 @@ Install `reflect-metadata`:
 npm install reflect-metadata
 ```
 
-Install `mediats`:
+Install `mediatsion`:
 ```
-npm install mediats
+npm install mediatsion
 ```
 
 ## **How-To:**
@@ -75,7 +75,7 @@ class ExampleEventHandler implements IEventHandler<ExampleEvent>  {
 **NOTE:** Currently you need to pass in the name of the `Event` object as a string.
 ### **3. Use `Bus` to `mediate`:**
 ```typescript
-import { Bus } from mediats;
+import { Bus } from mediatsion;
 
 const bus: Bus = new Bus();
 const exampleRequestHandler = new ExampleRequestHandler();
