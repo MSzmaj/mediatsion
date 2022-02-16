@@ -33,7 +33,7 @@ class Bus implements IBus {
 
     async publish<TRequest extends IInput>(event: IEvent): Promise<Result<void[], Error>> {
         if (event === undefined) {
-            return Err(new Error(`${EVENT_HANDLER_CREATION_ERROR}: Event must be instantiaed.`));
+            return Err(new Error(`${EVENT_HANDLER_CREATION_ERROR}: Event must be instantiated.`));
         }
 
         const requestType = event.constructor.name;
