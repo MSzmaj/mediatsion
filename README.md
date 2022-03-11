@@ -79,13 +79,10 @@ import { Bus } from mediatsion;
 
 const bus: Bus = new Bus();
 const exampleRequestHandler = new ExampleRequestHandler();
-const reuslt = await bus.send(exampleRequestHandler);
+const requestResult = await bus.send(exampleRequestHandler);
 
-const exampleEventHandler1 = new ExampleEventHandler1();
-const result = await bus.publish(ExampleEvent);
-
-const exampleEventHandler2 = new ExampleEventHandler2();
-await bus.publish(ExampleEvent);
+const exampleEvent = new ExampleEvent;
+const eventResult = await bus.publish(exampleEvent); //NOTE: this will always be a void array. Only check for result.ok.
 ```
 
 ### **3A. Create a publish strategy:**
@@ -101,7 +98,7 @@ const strategy = async (handlers: IEventHandler<TestEvent>[], event: IEvent): Pr
         return result;
     }
 
-const reuslt = await bus.publish(ExampleEvent, strategy);
+const reuslt = await bus.publish(exampleEvent, strategy);
 ```
 
 ## Release Notes:
