@@ -83,6 +83,7 @@ const result = await bus.send(exampleRequestHandler1);
 
 const exampleEventHandler2 = new ExampleEventHandler2();
 await bus.publish(exampleEventHandler2);
+```
 
 ### **2C. Create a publish strategy:**
 
