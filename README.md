@@ -78,14 +78,17 @@ class ExampleEventHandler implements IEventHandler<ExampleEvent>  {
 import { Bus } from mediatsion;
 
 const bus: Bus = new Bus();
+const exampleRequestHandler = new ExampleRequestHandler();
+const reuslt = await bus.send(exampleRequestHandler);
+
 const exampleEventHandler1 = new ExampleEventHandler1();
-const result = await bus.send(exampleRequestHandler1);
+const result = await bus.publish(ExampleEvent);
 
 const exampleEventHandler2 = new ExampleEventHandler2();
-await bus.publish(exampleEventHandler2);
+await bus.publish(ExampleEvent);
 ```
 
-### **2C. Create a publish strategy:**
+### **3A. Create a publish strategy:**
 
 A strategy will allow you to run event handlers in a different order than registered. This will allow you to run them in parallel as well.
 
@@ -97,6 +100,8 @@ const strategy = async (handlers: IEventHandler<TestEvent>[], event: IEvent): Pr
         }
         return result;
     }
+
+const reuslt = await bus.publish(ExampleEvent, strategy);
 ```
 
 ## Release Notes:
