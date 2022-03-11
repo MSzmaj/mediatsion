@@ -30,7 +30,7 @@ class Bus implements IBus {
             return createRequestHandlerToken(requestType, resultType);
         }
     }
-    async publish<TRequest extends IInput>(event: IEvent, strategy: (handlers: Array<IEventHandler<TRequest>>, event: IEvent) => Promise<Array<void>>): Promise<Result<Array<void>, Error>> {
+    async publish<TRequest extends IInput>(event: IEvent, strategy?: (handlers: Array<IEventHandler<TRequest>>, event: IEvent) => Promise<Array<void>>): Promise<Result<Array<void>, Error>> {
         if (event === undefined) {
             return Err(new Error(`${EVENT_HANDLER_CREATION_ERROR}: Event must be instantiated.`));
         }
