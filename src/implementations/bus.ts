@@ -30,8 +30,7 @@ class Bus implements IBus {
             return createRequestHandlerToken(requestType, resultType);
         }
     }
-
-    async publish<TRequest extends IInput>(event: IEvent): Promise<Result<void[], Error>> {
+    async publish<TRequest extends IInput>(event: IEvent, strategy: (handlers: Array<IEventHandler<TRequest>>, event: IEvent) => Promise<Array<void>>): Promise<Result<Array<void>, Error>> {
         if (event === undefined) {
             return Err(new Error(`${EVENT_HANDLER_CREATION_ERROR}: Event must be instantiated.`));
         }
@@ -39,15 +38,21 @@ class Bus implements IBus {
         const requestType = event.constructor.name;
         const token = createEventHandlerToken(requestType);
 
-        const handlers = this.getHandlers(token, eventHandlerTypeRegistry, this._eventHandlers) as IEventHandler<TRequest>[];
+        const handlers = this.getHandlers(token, eventHandlerTypeRegistry, this._eventHandlers) as Array<IEventHandler<TRequest>>;
 
-        const results = await Promise.all(
+        const publishMethod = strategy ?? this.defaultPublish;
+
+        const results = await publishMethod(handlers, event);
+
+        return Ok(results);
+    }
+
+    private async defaultPublish<TRequest> (handlers: Array<IEventHandler<TRequest>>, event: IEvent): Promise<Array<void>> {
+        return await Promise.all(
             handlers.map(async (handler) => {
                 await handler.handleAsync(event);
             })
-        )
-
-        return Ok(results);
+        );
     }
 
     private createHandler<THandler> (handlerToken: string, handlerMap: Map<string,THandler>, handlerType: Type<THandler>): THandler {
@@ -60,7 +65,7 @@ class Bus implements IBus {
         return handler;
     }
 
-    private getHandlerTypes<THandler>(handlerToken: string, handlerTypeRegistry: Map<string, Type<THandler>> | Map<string, Type<THandler>[]>): Type<THandler> | Type<THandler>[] {
+    private getHandlerTypes<THandler>(handlerToken: string, handlerTypeRegistry: Map<string, Type<THandler>> | Map<string, Array<Type<THandler>>>): Type<THandler> | Array<Type<THandler>> {
         const result = handlerTypeRegistry.get(handlerToken);
 
         if (result === undefined) {
@@ -70,10 +75,10 @@ class Bus implements IBus {
         return result;
     }
 
-    private getHandlers<THandler> (handlerToken: string, handlerTypeRegistry: Map<string, Type<THandler>[]>, handlerMap: Map<string,THandler>): THandler[] {
-        const handlerTypes = this.getHandlerTypes(handlerToken, handlerTypeRegistry) as Type<THandler>[];
+    private getHandlers<THandler> (handlerToken: string, handlerTypeRegistry: Map<string, Array<Type<THandler>>>, handlerMap: Map<string,THandler>): Array<THandler> {
+        const handlerTypes = this.getHandlerTypes(handlerToken, handlerTypeRegistry) as Array<Type<THandler>>;
 
-        const handlers: THandler[] = [];
+        const handlers: Array<THandler> = new Array<THandler>();
 
         handlerTypes.forEach(handlerType => {
             const handler = this.createHandler(`${handlerType.name}`, handlerMap, handlerType);

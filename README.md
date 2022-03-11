@@ -94,17 +94,12 @@ await bus.publish(exampleEventHandler);
 ```
 
 ## Release Notes:
-### 0.1.1:
-* Type safety
-* Send and publish functionality
-
-## Roadmap:
 ### 0.1.2:
-* Pipeline functionality
 * Publish strategies
 
+## Roadmap:
 ### 0.1.3:
-* DI framework compatability (other than tsyringe)
+* Pipeline functionality
 
 ### 1.0.0:
 * Production ready release
