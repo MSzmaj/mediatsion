@@ -1,5 +1,5 @@
 # mediaTSion
-An in-process mediator/pipeline library for Typescript and NodeJS.
+An in-process mediator/pipeline library for Typescript.
 
 **NOTE: Work in progress**
 
